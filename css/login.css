@@ -46,12 +46,12 @@ p { text-align: center; margin-top: 15px; font-size: 0.9em; }
 a { color: #007bff; text-decoration: none; }
 
 .form-box {
-    display: block; /* Por defecto se ven */
+    display: block;
 }
 
 #incorrect{
     display: none;
 }
 .hidden {
-    display: none; /* Esta clase los oculta */
+    display: none; 
 }

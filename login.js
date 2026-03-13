@@ -25,5 +25,10 @@ registerForm.addEventListener('submit', (event)=>{
         event.preventDefault();
         incorrect.style.display='block'
     }
-})
+});
 
+password.forEach(input=>{
+    input.addEventListener('input', () =>{
+        incorrect.style.display='none';
+    });
+});
