@@ -1,5 +1,5 @@
-const loginForm=document.getElementById('loginForm');
-const registerForm=document.getElementById('registerForm');
+const loginForm=document.getElementById('login-Form');
+const registerForm=document.getElementById('register-Form');
 const showRegister=document.getElementById('showRegister');
 const showLogin=document.getElementById('showLogin');
 
