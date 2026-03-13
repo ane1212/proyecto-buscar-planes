@@ -1,7 +1,7 @@
-const loginForm=document.getElementById('login-Form');
-const registerForm=document.getElementById('register-Form');
-const showRegister=document.getElementById('showRegister');
-const showLogin=document.getElementById('showLogin');
+const loginForm=document.getElementById('login-form');
+const registerForm=document.getElementById('register-form');
+const showRegister=document.getElementById('show-register');
+const showLogin=document.getElementById('show-login');
 
 showRegister.addEventListener('click', (event)=>{
     event.preventDefault();
