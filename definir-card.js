@@ -19,10 +19,9 @@ function createCard(event) {
         </div>
 
         <div class="card-content">
-            <p class="card-date">${event.startDate}</p>
-            <p class="card-location">${event.municipality}</p>
-            <h3 class="card-title">${event.title}</h3>
-            <div class="card-description">${event.description}</div>
+            <h3 class="card-title">${event.title}</h3>             
+            <p class="card-date">${event.startDate} - ${event.endDate}</p>
+            <p class="card-location">${event.municipality}</p>                  
         </div>
     </article>
     `;

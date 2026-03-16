@@ -28,12 +28,32 @@
     object-fit: cover;
 }
 
-.card-description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    line-clamp: 2;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+.card-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 30px;
+}
+
+.card-title {
+    order: 1;
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-location {
+    order: 2;
+    position: absolute;
+    bottom: 35px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.card-date {
+    order: 3;
+    margin-top: 15px;
+    font-size: 0.85rem;
 }
 
 .type-event {
