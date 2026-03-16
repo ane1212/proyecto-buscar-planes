@@ -1,4 +1,4 @@
-import { events } from './api/apiPlanes.js';
+import { events } from '../../../api/apiPlanes.js';
 
 function createCard(event) {
     return `
