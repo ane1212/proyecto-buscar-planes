@@ -6,8 +6,8 @@ class APIEvent {
         this.id = event.id;
         this.title = event.nameEs;
         this.description = event.descriptionEs;
-        this.startDate = event.startDate;
-        this.endDate = event.endDate;
+        this.startDate = new Date(event.startDate).toLocaleDateString();
+        this.endDate = new Date(event.endDate).toLocaleDateString();
         this.municipality = event.municipalityEs;
         this.images = event.images[0]?.imageUrl;
         this.type = event.typeEs;
