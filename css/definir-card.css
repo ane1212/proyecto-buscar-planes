@@ -28,12 +28,32 @@
     object-fit: cover;
 }
 
-.card-description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    line-clamp: 2;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+.card-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 30px;
+}
+
+.card-title {
+    order: 1;
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-location {
+    order: 2;
+    position: absolute;
+    bottom: 35px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.card-date {
+    order: 3;
+    margin-top: 15px;
+    font-size: 0.85rem;
 }
 
 .type-event {
@@ -58,11 +78,49 @@
     border-radius: 0.75rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s transition;
+}
+
+.icon-fav svg {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    fill: none;
+    stroke: currentColor;
+}
+
+/* Estado cuando se hace clic (Activo) */
+.icon-fav.active {
+    background: #ff4b5c;
+    border-color: #ff4b5c;
+}
+
+.icon-fav.active svg {
+    fill: white;
+    stroke: white;
+    transform: scale(1.2);
 }
 
 /* Ajustes para Desktop */
+
+#view-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
 @media (min-width: 768px) {
     .card {
-        width: 25%;
+        margin: 0;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
     }
 }
