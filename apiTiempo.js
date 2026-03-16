@@ -1,30 +1,54 @@
-function getWeatherDescription(code){
-  let response;
-  if(code === 0){
-    response =  "Soleado ☀️";
-  } 
-  if(code === 1 || code === 2) {
-    response = "Parcialmente nublado ⛅";
+function getWeatherDescription(code) {
+  if (code == null || code === undefined) {
+    return "Sin datos";
   }
-  if(code === 3){
-    response ="Nublado ☁️";
+
+  switch (true) {
+    case code === 0:
+      return "Cielo despejado ☀️";
+
+    case code === 1:
+      return "Mayormente despejado 🌤️";
+
+    case code === 2:
+      return "Parcialmente nublado ⛅";
+
+    case code === 3:
+      return "Nublado ☁️";
+
+    case code >= 45 && code <= 48:
+      return "Niebla 🌫️";
+
+    case code >= 51 && code <= 55:
+      return "Llovizna 🌦️";
+
+    case code >= 56 && code <= 57:
+      return "Llovizna helada ❄️🌦️";
+
+    case code >= 61 && code <= 65:
+      return "Lluvia 🌧️";
+
+    case code >= 66 && code <= 67:
+      return "Lluvia helada 🌧️❄️";
+
+    case code >= 71 && code <= 75:
+      return "Nieve ❄️";
+
+    case code === 77:
+      return "Granizo de nieve / Aguanieve fina ❄️";
+
+    case code >= 80 && code <= 82:
+      return "Chubascos 🌧️";
+
+    case code >= 85 && code <= 86:
+      return "Chubascos de nieve 🌨️";
+
+    case code >= 95 && code <= 99:
+      return "Tormenta ⛈️";
+
+    default:
+      return `Desconocido (${code})`;
   }
-  if(code >= 45 && code <= 48) {
-    response = "Niebla 🌫";
-  }
-  if(code >= 51 && code <= 67){ 
-    response = "Lluvia ligera 🌦";
-  }
-  if(code >= 80 && code <= 82){ 
-    response = "Lluvia 🌧";
-  }
-  if(code >= 95){
-    response = "Tormenta ⛈";
-  }
-  else if(response==null){
-    response = "Clima desconocido";
-  }
-  return response;
 }
 
 export default async function loadWeatherByCoordinates(LAT,LON) {
