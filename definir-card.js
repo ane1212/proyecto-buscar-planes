@@ -4,8 +4,7 @@ function createCard(event) {
     return `
     <article class="card">
         <div class="card-header">
-            <img src="${event.images}" class="card-img">
-            
+            <img src="${event.images}" class="card-img" alt="${event.title}">            
             <div class="icon-fav">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
@@ -38,3 +37,18 @@ async function loadPlanSection() {
 
 }
 window.addEventListener('DOMContentLoaded', loadPlanSection);
+
+
+const container = document.getElementById('view-container');
+container.addEventListener('click', (e) => {
+    const favBtn = e.target.closest('.icon-fav');
+
+    if (favBtn) {
+        favBtn.classList.toggle('active');
+
+        favBtn.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            favBtn.style.transform = 'scale(1)';
+        }, 100);
+    }
+});
