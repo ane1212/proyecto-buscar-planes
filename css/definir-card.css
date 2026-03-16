@@ -7,6 +7,10 @@
 }
 
 /* Diseño para Móvil (Base) */
+body {
+    background: var(--secondary);
+}
+
 .card {
     background: var(--bg-card);
     border-radius: 1rem;
