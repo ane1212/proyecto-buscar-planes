@@ -14,7 +14,26 @@ class APIEvent {
         this.price = event.priceEs;
         this.purchaseUrl = event.purchaseUrlEs;
         this.hour = event.openingHoursEs;
+        const provinceData = provinces.find(
+            p => p.provinceId == event.provinceNoraCode
+        );
+
+        this.province = provinceData ? new APIProvince(provinceData) : null;
+        // this.province = event.provinceNoraCode;
+        this.municipalityLatitude = event.municipalityLatitude
+        this.municipalityLongitude = event.municipalityLongitude
     }
+}
+
+
+class APIProvince {
+    constructor(province) {
+        this.id = province?.provinceId;
+        this.name = province?.nameEs;
+        // this.municipalityLatitude = APIEvent.municipalityLatitude;
+
+    }
+
 }
 
 
@@ -22,6 +41,7 @@ async function events() {
     try {
         const res = await fetch(`${URL_BASE}/v1.0/events?_elements=20&_page=1&month=03&year=2026`);
         const data = await res.json();
+
 
         return data.items.map(item => new APIEvent(item));
     } catch (err) {
@@ -54,4 +74,16 @@ function yearByMunicipality(year, province, municipality) {
         .catch(err => console.error(err));
 }
 
-export { events, eventTypes, eventTypeDate, yearByMunicipality, APIEvent };
+async function provinces() {
+    try {
+        const res = await fetch(`${URL_BASE}/v1.0/provinces`);
+        const data = await res.json();
+
+        return data.items.map(item => new APIProvince(item));
+    } catch (err) {
+        console.error("Error cargando provincias:", err);
+        return [];
+    }
+
+}
+export { events, eventTypes, eventTypeDate, yearByMunicipality, provinces };

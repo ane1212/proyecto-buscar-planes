@@ -1,6 +1,6 @@
-import { events } from './api/apiPlanes.js';
+import { events, provinces } from './api/apiPlanes.js';
 
-function createCard(event) {
+function createCard(event, province) {
     return `
     <article class="card">
         <div class="card-header">
@@ -20,7 +20,7 @@ function createCard(event) {
         <div class="card-content">
             <div class="content-top">
                 <h2 class="card-title">${event.title}</h2>
-                <p class="card-location">${event.municipality}</p>
+                <p class="card-location">${event.municipality} - ${event.province}</p>
             </div>
 
             <div class="card-dates">
@@ -49,7 +49,7 @@ function createCard(event) {
 
 
 async function loadPlanSection() {
-    const data = await events();
+    const data = await events()
     const container = document.getElementById('view-container');
 
     container.innerHTML = data.map(e => createCard(e)).join('');
