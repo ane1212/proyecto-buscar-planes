@@ -7,7 +7,9 @@
   <title>Planes Fav</title>
 
   <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
-  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="src/css/index.css">
+  <link rel="stylesheet" href="src/css/definir-card.css">
+
 </head>
 
 <body>
@@ -21,16 +23,16 @@
     </div>
 
     <div class="nav-right">
-      <button class="login-btn">Login / Registro</button>
+      <button class="login-btn" onclick="location.href='login.html'">Login / Registro</button>
     </div>
 
   </nav>
 
-  <section class="hero">
+  <!-- <section class="hero">
     <h1>Descubre planes culturales según el clima en Euskadi</h1>
     <p>Consulta el tiempo actual y encuentra eventos culturales que se adapten al clima del día.</p>
     <button class="cta-btn" onclick="location.href='eventos.html'">Explorar planes</button>
-  </section>
+  </section> -->
 
   <section id="weather">
     <h2>Clima actual en Euskadi</h2>
@@ -39,11 +41,8 @@
     </div>
   </section>
 
-  <section id="events">
-    <h2>Eventos culturales en Euskadi</h2>
-    <p>Explora conciertos, teatro, exposiciones y actividades culturales recomendadas según el clima del día.</p>
-    <button class="cta-btn" onclick="location.href='eventos.html'">Ver eventos</button>
-  </section>
+  <main id="view-container">
+  </main>
 
   <section id="about">
     <h2>¿Cómo funciona?</h2>
@@ -67,7 +66,10 @@
     <p>Planes Fav © 2026</p>
   </footer>
 
-  <script type="module" src="index.js"></script>
+  <script type="module" src="src/js/index.js"></script>
+  <script type="module" src="src/js/definir-card.js"></script>
+
+
 
 </body>
 
