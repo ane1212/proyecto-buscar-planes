@@ -1,4 +1,4 @@
-import { events } from '../api/apiPlanes.js';
+import { events, municipalities } from '../api/apiPlanes.js';
 import loadWeatherByCoordinates from '../api/apiTiempo.js'; 
 
 export class EventSearcher {
