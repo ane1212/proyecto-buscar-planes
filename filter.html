@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Filtro</title>
+</head>
+<body>
+
+<h2>Filtrar resultados</h2>
+
+<form class="filtro">
+  
+
+  <div>
+    <label for="categoria">Categoría</label>
+    <select id="categoria" name="categoria">
+      <option value="">Todas</option>
+      <option value="Musical"></option>
+      <option value="concierto"></option>
+      <option value=""></option>
+    </select>
+  </div>
+
+ 
+  <div>
+    <label for="fecha">Fecha</label>
+    <input type="date" id="fecha" name="fecha">
+  </div>
+
+ 
+  <div>
+    <label for="lugar">Lugar</label>
+    <input type="text" id="lugar" name="lugar" placeholder="Ciudad o lugar">
+  </div>
+
+
+  <div id="tiempo">
+ 
+  </div>
+
+  <div style="justify-content: flex-end;">
+    <button type="submit">Filtrar</button>
+  </div>
+
+</form>
+
+</body>
+</html>
