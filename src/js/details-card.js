@@ -1,8 +1,8 @@
-import { events, provinces } from '../../../api/apiPlanes.js';
+import { eventById } from '../api/apiPlanes.js';
 
-function createCard(event, province) {
+function createDetailsCard(event) {
     return `
-    <article class="card">
+    <article class="card" id="${event.id}">
         <div class="card-header">
             <img src="${event.images}" class="card-img" alt="${event.title}">
             
@@ -47,12 +47,22 @@ function createCard(event, province) {
     `;
 }
 
-
 async function loadPlanSection() {
-    const data = await events()
-    const container = document.getElementById('view-container');
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
 
-    container.innerHTML = data.map(e => createCard(e)).join('');
+    const container = document.getElementById('view-container-details');
 
+    if (id) {
+        const event = await eventById(id);
+        if (event) {
+            container.innerHTML = createDetailsCard(event);
+        } else {
+            container.innerHTML = "<p>No se encontró el evento.</p>";
+        }
+    } else {
+        container.innerHTML = "<p>Error: No se proporcionó un ID de evento.</p>";
+    }
 }
+
 window.addEventListener('DOMContentLoaded', loadPlanSection);
