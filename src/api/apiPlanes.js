@@ -15,14 +15,6 @@ class APIEvent {
         this.purchaseUrl = event.purchaseUrlEs;
         this.hour = event.openingHoursEs;
         this.province = provinceMap.get(Number(event.provinceNoraCode)) || '';
-        const municipality = municipalitiesMap.get(Number(event.municipalityNoraCode));
-
-        if (municipality) {
-            municipality.latitude = event.municipalityLatitude;
-            municipality.longitude = event.municipalityLongitude;
-        }
-
-        this.municipality = municipality;
     }
 }
 
@@ -51,7 +43,7 @@ class APIType {
 
 
 
-async function events(elemets, page, day, month, municipalityId, provinceId, type, year) {
+async function events() {
     try {
         const provinceList = await provinces()
         const provinceMap = new Map(
@@ -61,7 +53,7 @@ async function events(elemets, page, day, month, municipalityId, provinceId, typ
         const municipalitiesMap = new Map(
             municipalitiesList.map(p => [p.id, p])
         );
-        const res = await fetch(`${URL_BASE}/v1.0/events?_elements=${elemets}&_page=${page}&day=${day}&month=${month}&municipalityNoraCode=${municipalityId}&provinceNoraCode=${provinceId}&type=${type}&year=${year}`);
+        const res = await fetch(`${URL_BASE}/v1.0/events?year=2026`);
         const data = await res.json();
 
 
@@ -71,6 +63,28 @@ async function events(elemets, page, day, month, municipalityId, provinceId, typ
         return [];
     }
 }
+
+
+// async function events(elemets, page, day, month, municipalityId, provinceId, type, year) {
+//     try {
+//         const provinceList = await provinces()
+//         const provinceMap = new Map(
+//             provinceList.map(p => [p.id, p])
+//         );
+//         const municipalitiesList = await municipalities()
+//         const municipalitiesMap = new Map(
+//             municipalitiesList.map(p => [p.id, p])
+//         );
+//         const res = await fetch(`${URL_BASE}/v1.0/events?_elements=${elemets}&_page=${page}&day=${day}&month=${month}&municipalityNoraCode=${municipalityId}&provinceNoraCode=${provinceId}&type=${type}&year=${year}`);
+//         const data = await res.json();
+
+
+//         return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
+//     } catch (err) {
+//         console.error("Error cargando eventos:", err);
+//         return [];
+//     }
+// }
 
 async function eventTypes() {
     try {
@@ -109,7 +123,27 @@ async function municipalities() {
         return [];
     }
 
+}
+
+async function eventById(id) {
+    try {
+        const provinceList = await provinces()
+        const provinceMap = new Map(
+            provinceList.map(p => [p.id, p])
+        );
+        const municipalitiesList = await municipalities()
+        const municipalitiesMap = new Map(
+            municipalitiesList.map(p => [p.id, p])
+        );
+        const res = await fetch(`${URL_BASE}/v1.0/events/${id}`);
+        const data = await res.json();
+
+        return new APIEvent(data, provinceMap, municipalitiesMap);
+    } catch (err) {
+        console.error("Error cargando municipios:", err);
+        return [];
+    }
 
 }
 
-export { events, eventTypes, provinces, municipalities };
+export { events, eventTypes, provinces, municipalities, eventById };

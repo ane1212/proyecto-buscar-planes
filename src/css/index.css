@@ -36,15 +36,17 @@ body {
 }
 
 .nav-left .logo {
-  width: 135px; 
+  width: 135px;
   height: auto;
   object-fit: contain;
 }
 
-.nav-right {
+.nav-right a {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
+
 
 .login-btn {
   background-color: var(--secondary);
@@ -121,7 +123,7 @@ h2 {
   background-color: var(--bg-card);
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* FOOTER */
@@ -160,26 +162,28 @@ footer {
   }
 }
 
-@media(max-width: 480px){
-  .navbar{
+@media(max-width: 480px) {
+  .navbar {
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
   }
 
-  .nav-left, .nav-right{
+  .nav-left,
+  .nav-right {
     justify-content: center;
   }
 
-  .hero h1{
+  .hero h1 {
     font-size: 1.6rem;
   }
 
-  .hero p{
+  .hero p {
     font-size: 0.95rem;
   }
 
-  .cta-btn, .login-btn{
+  .cta-btn,
+  .login-btn {
     width: 100%;
     text-align: center;
   }

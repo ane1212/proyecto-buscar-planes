@@ -1,8 +1,8 @@
-import { events } from '../../../api/apiPlanes.js';
+import { events } from '../api/apiPlanes.js';
 
 function createCard(event) {
     return `
-    <article class="card">
+    <article class="card" id="${event.id}">
         <div class="card-header">
             <img src="${event.images}" class="card-img" alt="${event.title}">            
             <div class="icon-fav">
@@ -21,7 +21,7 @@ function createCard(event) {
         <div class="card-content">
             <h3 class="card-title">${event.title}</h3>             
             <p class="card-date">${event.startDate} - ${event.endDate}</p>
-            <p class="card-location">${event.municipality}</p>                  
+            <p class="card-location">${event.municipality} - ${event.province.name}</p>                  
         </div>
     </article>
     `;
@@ -41,13 +41,23 @@ window.addEventListener('DOMContentLoaded', loadPlanSection);
 const container = document.getElementById('view-container');
 container.addEventListener('click', (e) => {
     const favBtn = e.target.closest('.icon-fav');
+    const card = e.target.closest('.card');
 
     if (favBtn) {
+        e.stopPropagation();
         favBtn.classList.toggle('active');
 
         favBtn.style.transform = 'scale(0.9)';
         setTimeout(() => {
             favBtn.style.transform = 'scale(1)';
         }, 100);
+        return;
+    }
+
+    if (card) {
+        const id = card.id;
+        window.location.href = `details-card.html?id=${id}`;
     }
 });
+
+
