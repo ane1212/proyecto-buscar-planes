@@ -42,51 +42,6 @@ class APIType {
 }
 
 
-
-// async function events() {
-//     try {
-//         const provinceList = await provinces()
-//         const provinceMap = new Map(
-//             provinceList.map(p => [p.id, p])
-//         );
-//         const municipalitiesList = await municipalities()
-//         const municipalitiesMap = new Map(
-//             municipalitiesList.map(p => [p.id, p])
-//         );
-//         const res = await fetch(`${URL_BASE}/v1.0/events?year=2026`);
-//         const data = await res.json();
-
-
-//         return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
-//     } catch (err) {
-//         console.error("Error cargando eventos:", err);
-//         return [];
-//     }
-// }
-
-
-// async function events(elemets, page, day, month, municipalityId, provinceId, type, year) {
-//     try {
-//         const provinceList = await provinces()
-//         const provinceMap = new Map(
-//             provinceList.map(p => [p.id, p])
-//         );
-//         const municipalitiesList = await municipalities()
-//         const municipalitiesMap = new Map(
-//             municipalitiesList.map(p => [p.id, p])
-//         );
-//         const res = await fetch(`${URL_BASE}/v1.0/events?_elements=${elemets}&_page=${page}&day=${day}&month=${month}&municipalityNoraCode=${municipalityId}&provinceNoraCode=${provinceId}&type=${type}&year=${year}`);
-//         const data = await res.json();
-
-
-//         return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
-
-//     } catch (err) {
-//         console.error("Error cargando eventos:", err);
-//         return [];
-//     }
-// }
-
 async function events(elemets, page, day, month, municipalityId, provinceId, type, year) {
     try {
         const provinceList = await provinces();
@@ -95,7 +50,7 @@ async function events(elemets, page, day, month, municipalityId, provinceId, typ
         const municipalitiesList = await municipalities();
         const municipalitiesMap = new Map(municipalitiesList.map(p => [p.id, p]));
 
-        // 👇 Construir URL solo con parámetros que tienen valor
+
         const params = new URLSearchParams();
         if (elemets != null) params.set('_elements', elemets);
         if (page != null) params.set('_page', page);
@@ -109,7 +64,7 @@ async function events(elemets, page, day, month, municipalityId, provinceId, typ
         const res = await fetch(`${URL_BASE}/v1.0/events?${params.toString()}`);
         const data = await res.json();
 
-        if (!data.items) return [];  // 👈 protección si la API devuelve error
+        if (!data.items) return [];
 
         return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
 
