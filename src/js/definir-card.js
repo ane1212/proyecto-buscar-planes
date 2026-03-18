@@ -1,6 +1,6 @@
 import { events } from '../api/apiPlanes.js';
 
-function createCard(event) {
+export function createCard(event) {
     return `
       <article class="card" id="${event.id}">
         <div class="card-header">
@@ -16,7 +16,6 @@ function createCard(event) {
                 <span>${event.type || 'Evento'}</span>
             </div>
         </div>
-
         <div class="card-content">
             <div class="content-top">
                 <h2 class="card-title">${event.title}</h2>
@@ -28,37 +27,37 @@ function createCard(event) {
     `;
 }
 
+export function renderEvents(data) {
+    const container = document.getElementById('view-container');
+    if (!data || data.length === 0) {
+        container.innerHTML = `<p>No se encontraron eventos.</p>`;
+        return;
+    }
+    container.innerHTML = data.map(e => createCard(e)).join('');
+}
 
 async function loadPlanSection() {
-    const data = await events();
-    const container = document.getElementById('view-container');
-
-    container.innerHTML = data.map(e => createCard(e)).join('');
-
+    const data = await events(10, 1, null, null, null, null, null, 2026);
+    renderEvents(data);
 }
-window.addEventListener('DOMContentLoaded', loadPlanSection);
 
+window.addEventListener('DOMContentLoaded', loadPlanSection);
 
 const container = document.getElementById('view-container');
 container.addEventListener('click', (e) => {
     const favBtn = e.target.closest('.icon-fav');
     const card = e.target.closest('.card');
-
     if (favBtn) {
         e.stopPropagation();
         favBtn.classList.toggle('active');
-
         favBtn.style.transform = 'scale(0.9)';
         setTimeout(() => {
             favBtn.style.transform = 'scale(1)';
         }, 100);
         return;
     }
-
     if (card) {
         const id = card.id;
         window.location.href = `details-card.html?id=${id}`;
     }
 });
-
-
