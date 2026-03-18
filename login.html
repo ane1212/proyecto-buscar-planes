@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso - Planes6</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
     <div class="container">
 
@@ -17,11 +19,11 @@
             <p>¿No tienes cuenta? <a href="#" id="show-register">Regístrate aquí</a></p>
         </form>
 
-        
+
         <form id="register-form" class="form-box hidden">
             <h1>Crear Cuenta</h1>
-            <input type="text" id="name" placeholder="Nombre completo" required>
-            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <input type="text" id="name" name="name" placeholder="Nombre completo" required>
+            <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
             <input type="password" id="reg-pass1" class="password" placeholder="Crea una contraseña" required>
             <input type="password" id="reg-pass2" class="password" placeholder="Repite la contraseña" required>
             <span id="incorrect">Las contraseñas no coinciden</span>
@@ -30,6 +32,7 @@
         </form>
     </div>
 
-    <script  type="module" src="login.js"></script>
+    <script type="module" src="login.js"></script>
 </body>
+
 </html>
