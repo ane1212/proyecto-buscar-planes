@@ -1,5 +1,14 @@
 @import url('styles.css');
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--secondary);
+}
+
 .container {
     background: var(--bg-card);
     padding: 30px;
