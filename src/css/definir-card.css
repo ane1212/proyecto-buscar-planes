@@ -1,0 +1,182 @@
+:root {
+    --primary: #4F54DE;
+    --secondary: #4F9BDE;
+    --bg-card: #ffffff;
+    --text-main: #6E636B;
+
+}
+
+/* Diseño para Móvil (Base) */
+body {
+    background: var(--secondary);
+}
+
+.card {
+    background: var(--bg-card);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.card-header {
+    position: relative;
+    height: 200px;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 30px;
+}
+
+.card-title {
+    order: 1;
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-location {
+    order: 2;
+    position: absolute;
+    bottom: 35px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.card-date {
+    order: 3;
+    margin-top: 15px;
+    font-size: 0.85rem;
+}
+
+.type-event {
+    width: 10%;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: var(--bg-card);
+    display: flex;
+    align-items: center;
+}
+
+/* Badge de iconFav */
+.icon-fav {
+    width: 7%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--bg-card);
+    background: var(--secondary);
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s transition;
+}
+
+.icon-fav svg {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    fill: none;
+    stroke: currentColor;
+}
+
+/* Estado cuando se hace clic (Activo) */
+.icon-fav.active {
+    background: #ff4b5c;
+    border-color: #ff4b5c;
+}
+
+.icon-fav.active svg {
+    fill: white;
+    stroke: white;
+    transform: scale(1.2);
+}
+
+/* Ajustes para Desktop */
+
+#view-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+@media (min-width: 768px) {
+    .card {
+        margin: 0;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--bg-card);
+    color: var(--primary);
+}
+
+.nav-left a {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left .logo {
+    width: 80px;
+    height: auto;
+    object-fit: contain;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.login-btn {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #3a7ac1;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    margin-top: 2rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}

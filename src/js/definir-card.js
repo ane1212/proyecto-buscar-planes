@@ -1,11 +1,10 @@
-import { events } from './api/apiPlanes.js';
+import { events } from '../api/apiPlanes.js';
 
 function createCard(event) {
     return `
-    <article class="card">
+    <article class="card" id="${event.id}">
         <div class="card-header">
-            <img src="${event.images}" class="card-img">
-            
+            <img src="${event.images}" class="card-img" alt="${event.title}">            
             <div class="icon-fav">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
@@ -20,10 +19,9 @@ function createCard(event) {
         </div>
 
         <div class="card-content">
-            <p class="card-date">${event.startDate}</p>
-            <p class="card-location">${event.municipality}</p>
-            <h3 class="card-title">${event.title}</h3>
-            <div class="card-description">${event.description}</div>
+            <h3 class="card-title">${event.title}</h3>             
+            <p class="card-date">${event.startDate} - ${event.endDate}</p>
+            <p class="card-location">${event.municipality} - ${event.province.name}</p>                  
         </div>
     </article>
     `;
@@ -38,3 +36,28 @@ async function loadPlanSection() {
 
 }
 window.addEventListener('DOMContentLoaded', loadPlanSection);
+
+
+const container = document.getElementById('view-container');
+container.addEventListener('click', (e) => {
+    const favBtn = e.target.closest('.icon-fav');
+    const card = e.target.closest('.card');
+
+    if (favBtn) {
+        e.stopPropagation();
+        favBtn.classList.toggle('active');
+
+        favBtn.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            favBtn.style.transform = 'scale(1)';
+        }, 100);
+        return;
+    }
+
+    if (card) {
+        const id = card.id;
+        window.location.href = `details-card.html?id=${id}`;
+    }
+});
+
+
