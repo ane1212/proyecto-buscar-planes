@@ -2,7 +2,7 @@
 function createFooter() {
     return `
         <p>Planes Fav © 2026</p>
-        <p><a href="acerca.html">Acerca de</a></p>
+        <p><a href="about.html">Acerca de</a></p>
     `;
 }
 

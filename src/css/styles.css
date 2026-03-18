@@ -5,15 +5,20 @@
     --bg-card: #ffffff;
     --text-main: #6E636B;
     --text-light: #f3f4f6;
-    --text-main: #1f2937;
     --icon-fav: #ff4b5c;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 
 body {
     background: var(--secondary);
     font-family: sans-serif;
-
+    min-height: 100vh;
 }
 
 button {
