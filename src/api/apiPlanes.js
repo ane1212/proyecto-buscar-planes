@@ -36,33 +36,33 @@ class APIMunicipalities {
 
 class APIType {
     constructor(type) {
-        this.id = type?.type;
+        this.id = type?.id;
         this.name = type?.nameEs;
     }
 }
 
 
 
-async function events() {
-    try {
-        const provinceList = await provinces()
-        const provinceMap = new Map(
-            provinceList.map(p => [p.id, p])
-        );
-        const municipalitiesList = await municipalities()
-        const municipalitiesMap = new Map(
-            municipalitiesList.map(p => [p.id, p])
-        );
-        const res = await fetch(`${URL_BASE}/v1.0/events?year=2026`);
-        const data = await res.json();
+// async function events() {
+//     try {
+//         const provinceList = await provinces()
+//         const provinceMap = new Map(
+//             provinceList.map(p => [p.id, p])
+//         );
+//         const municipalitiesList = await municipalities()
+//         const municipalitiesMap = new Map(
+//             municipalitiesList.map(p => [p.id, p])
+//         );
+//         const res = await fetch(`${URL_BASE}/v1.0/events?year=2026`);
+//         const data = await res.json();
 
 
-        return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
-    } catch (err) {
-        console.error("Error cargando eventos:", err);
-        return [];
-    }
-}
+//         return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
+//     } catch (err) {
+//         console.error("Error cargando eventos:", err);
+//         return [];
+//     }
+// }
 
 
 // async function events(elemets, page, day, month, municipalityId, provinceId, type, year) {
@@ -79,19 +79,55 @@ async function events() {
 //         const data = await res.json();
 
 
-//         return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
+//         return data.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
+
 //     } catch (err) {
 //         console.error("Error cargando eventos:", err);
 //         return [];
 //     }
 // }
 
+async function events(elemets, page, day, month, municipalityId, provinceId, type, year) {
+    try {
+        const provinceList = await provinces();
+        const provinceMap = new Map(provinceList.map(p => [p.id, p]));
+
+        const municipalitiesList = await municipalities();
+        const municipalitiesMap = new Map(municipalitiesList.map(p => [p.id, p]));
+
+        // Construir URL solo con parámetros que tienen valor
+        const params = new URLSearchParams();
+        if (elemets) params.set('_elements', elemets);
+        if (page) params.set('_page', page);
+        if (day) params.set('day', day);
+        if (month) params.set('month', month);
+        if (municipalityId) params.set('municipalityNoraCode', municipalityId);
+        if (provinceId) params.set('provinceNoraCode', provinceId);
+        if (type) params.set('type', type);
+        if (year) params.set('year', year);
+
+        const res = await fetch(`${URL_BASE}/v1.0/events?${params.toString()}`);
+        const data = await res.json();
+
+        console.log('📦 Respuesta:', data); // quitar cuando funcione
+
+        // La API devuelve { items: [...] }
+        if (!data.items) return [];
+
+        return data.items.map(item => new APIEvent(item, provinceMap, municipalitiesMap));
+
+    } catch (err) {
+        console.error("Error cargando eventos:", err);
+        return [];
+    }
+}
+
 async function eventTypes() {
     try {
         const res = await fetch(`${URL_BASE}/v1.0/eventType`);
         const data = await res.json();
 
-        return data.items.map(item => new APIType(item));
+        return data.map(item => new APIType(item));
     } catch (err) {
         console.error("Error cargando tipos:", err);
         return [];

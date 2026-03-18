@@ -1,6 +1,7 @@
 import { events } from '../api/apiPlanes.js';
+import { applyFilters } from './eventSearcher.js';
 
-function createCard(event) {
+export function createCard(event) {
     return `
     <article class="card" id="${event.id}">
         <div class="card-header">
@@ -29,7 +30,7 @@ function createCard(event) {
 
 
 async function loadPlanSection() {
-    const data = await events();
+    const data = await events(elemets, page, day, month, municipalityId, provinceId, type, year);
     const container = document.getElementById('view-container');
 
     container.innerHTML = data.map(e => createCard(e)).join('');

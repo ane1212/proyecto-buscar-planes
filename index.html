@@ -41,53 +41,13 @@
     </div>
   </section>
 
-  <section id="filters" class="filters-container">
-    <h1>Encuentra tu plan ideal</h1>
-
-    <div class="filters-group">
-      
-      <select id="filter-type">
-        <option value="">Todas las categorías</option>
-        <option value="Concierto">Concierto</option>
-        <option value="Teatro">Teatro</option>
-        <option value="Exposición">Exposición</option>
-        <option value="Cine">Cine</option>
-      </select>
-
-      
-      <select id="filter-province">
-        <option value="">Provincia...</option>
-        <option value="1">Araba / Álava</option>
-        <option value="48">Bizkaia</option>
-        <option value="20">Gipuzkoa</option>
-      </select>
-
-      
-      <select id="filter-municipality" disabled>
-        <option value="">Selecciona municipio</option>
-      </select>
-
-      
-      <div class="date-group">
-        <input type="date" id="filter-date">
-       
-        <span id="date-weather-info" class="weather-badge"></span>
-      </div>
-
-      
-      <select id="filter-weather">
-        <option value="">Cualquier clima</option>
-        <option value="Soleado">Soleado</option>
-        <option value="Lluvia">Lluvia</option>
-        <option value="Nublado">Nublado</option>
-      </select>
-
-      <button id="btn-search" class="search-btn">Buscar Planes</button>
-    </div>
-
-    
-    <div id="smart-suggestion" class="suggestion-text"></div>
+  <section id="filter">
+    <select id="type"></select>
+    <select id="municipalities"></select>
+    <div id="date-filter"></div>
   </section>
+
+  
   <main id="view-container">
   </main>
 
@@ -114,9 +74,9 @@
   </footer>
 
   <script type="module" src="src/js/index.js"></script>
-  <script type="module" src="src/js/definir-card.js"></script>
+  <!-- <script type="module" src="src/js/definir-card.js"></script>-->
 
-
+  <script type="module" src="src/js/eventSearcher.js"></script>
 
 </body>
 
