@@ -1,6 +1,6 @@
 import { events, municipalities, eventTypes, } from '../api/apiPlanes.js';
-//import { renderEvents } from './js/definir-card.js';
 //import {loadWeatherByCoordinates} from '../api/apiTiempo.js';
+import { renderEvents } from './definir-card.js';
 
 //  class EventSearcher {
 //     constructor() {
@@ -60,17 +60,54 @@ import { events, municipalities, eventTypes, } from '../api/apiPlanes.js';
 
 
 
+// function filterType(type) {
+//     return `
+//     <section class="">
+//         <div class="filters-group">
+//             <select id="types">
+
+//                 <option value="${type.id}">${type.name}</option>
+//             </select>
+//         </div>
+//     </section>
+//     `;
+// }
+
+// async function listTypes() {
+//     const allTypes = await eventTypes();
+//     const section = document.getElementById('type');
+//     section.innerHTML = `<option value="todos">Todos</option>`;
+//     section.innerHTML += allTypes.map(e => filterType(e)).join('');
+// }
+// window.addEventListener('DOMContentLoaded', listTypes);
+
+
+
+
+
+// export function filterMunicipalities(municipalities) {
+//     return `
+//     <section class="">
+//         <div class="filters-group">
+//             <select id="municipalities">
+//                 <option value="${municipalities.id}">${municipalities.name}</option>
+//             </select>
+//         </div>
+//     </section>
+//     `;
+// }
+
+// async function listMunicipalities() {
+//     const allTypes = await municipalities();
+//     const section = document.getElementById('municipalities');
+//     section.innerHTML = `<option value="todos">Todos</option>`;
+//     section.innerHTML += allTypes.map(e => filterMunicipalities(e)).join('');
+// }
+// window.addEventListener('DOMContentLoaded', listMunicipalities);
+
+// ✅ Solo el <option>
 function filterType(type) {
-    return `
-    <section class="">
-        <div class="filters-group">
-            <select id="types">
-                
-                <option value="${type.id}">${type.name}</option>
-            </select>
-        </div>
-    </section>
-    `;
+    return `<option value="${type.id}">${type.name}</option>`;
 }
 
 async function listTypes() {
@@ -79,22 +116,12 @@ async function listTypes() {
     section.innerHTML = `<option value="todos">Todos</option>`;
     section.innerHTML += allTypes.map(e => filterType(e)).join('');
 }
+
 //window.addEventListener('DOMContentLoaded', listTypes);
 
-
-
-
-
+// ✅ Solo el <option>
 export function filterMunicipalities(municipalities) {
-    return `
-    <section class="">
-        <div class="filters-group">
-            <select id="municipalities">
-                <option value="${municipalities.id}">${municipalities.name}</option>
-            </select>
-        </div>
-    </section>
-    `;
+    return `<option value="${municipalities.id}">${municipalities.name}</option>`;
 }
 
 async function listMunicipalities() {
@@ -103,9 +130,8 @@ async function listMunicipalities() {
     section.innerHTML = `<option value="todos">Todos</option>`;
     section.innerHTML += allTypes.map(e => filterMunicipalities(e)).join('');
 }
+
 //window.addEventListener('DOMContentLoaded', listMunicipalities);
-
-
 
 function date() {
     return `
@@ -120,62 +146,45 @@ function listDate() {
 }
 //window.addEventListener('DOMContentLoaded', listDate);
 
-
-
 async function filterParameters(elemets, page, day, month, municipalityId, provinceId, type, year) {
     return await events(elemets, page, day, month, municipalityId, provinceId, type, year);
-
-
 }
 
 async function applyFilters() {
-    // Leer valores de los selectores
     const type = document.getElementById('type')?.value;
     const municipality = document.getElementById('municipalities')?.value;
     const dateValue = document.getElementById('filter-date')?.value;
 
-    // Parsear fecha
     let day = null, month = null, year = null;
     if (dateValue) {
-        const [y, m, d] = dateValue.split('/');
+        const [y, m, d] = dateValue.split('-');
         day = parseInt(d);
         month = parseInt(m);
         year = parseInt(y);
     }
 
-    // Convertir "todos" a null
     const municipalityId = municipality !== 'todos' ? municipality : null;
     const selectedType = type !== 'todos' ? type : null;
 
     const results = await filterParameters(
-        10,             // elements (cuántos cargar)
-        1,              // page
-        day,
-        month,
-        municipalityId, // municipalityNoraCode
-        null,           // provinceNoraCode
-        selectedType,
-        year
+        10, 1, day, month, municipalityId, null, selectedType, year
     );
 
     renderEvents(results);
 }
 
+// ✅ Al final los listeners
 window.addEventListener('DOMContentLoaded', () => {
     listMunicipalities();
     listDate();
     listTypes();
 
-    // Escuchar cambios en cada filtro
     document.getElementById('type')
         ?.addEventListener('change', applyFilters);
-
     document.getElementById('municipalities')
         ?.addEventListener('change', applyFilters);
-
     document.getElementById('filter-date')
         ?.addEventListener('change', applyFilters);
 
-    // Cargar eventos iniciales sin filtros
     applyFilters();
 });
