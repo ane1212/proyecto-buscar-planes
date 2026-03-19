@@ -8,7 +8,7 @@
 
   <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
   <link rel="stylesheet" href="src/css/index.css">
-  <link rel="stylesheet" href="src/css/definir-card.css">
+  <link rel="stylesheet" href="src/css/card.css">
 
 </head>
 
@@ -21,61 +21,35 @@
         <img src="assets/img/planes.png" alt="Planes Fav logo" class="logo">
       </a>
     </div>
-
+    <section id="filter">
+      <select id="type"></select>
+      <select id="municipalities"></select>
+      <div id="date-filter"></div>
+    </section>
     <div class="nav-right">
-      <button class="login-btn" onclick="location.href='login.html'">Login / Registro</button>
+      <button onclick="location.href='login.html'">Inicia sesión</button>
     </div>
 
   </nav>
 
-  <!-- <section class="hero">
-    <h1>Descubre planes culturales según el clima en Euskadi</h1>
-    <p>Consulta el tiempo actual y encuentra eventos culturales que se adapten al clima del día.</p>
-    <button class="cta-btn" onclick="location.href='eventos.html'">Explorar planes</button>
-  </section> -->
-
-  <section id="weather">
-    <h2>Clima actual en Euskadi</h2>
-    <div id="weather-info">
-      <p>Cargando clima...</p>
-    </div>
-  </section>
-
-  <section id="filter">
-    <select id="type"></select>
-    <select id="municipalities"></select>
-    <div id="date-filter"></div>
-  </section>
-
-
-  <main id="view-container">
-  </main>
-
-  <section id="about">
-    <h2>¿Cómo funciona?</h2>
-    <div class="steps">
-      <div class="step">
-        <h3>1. Consultamos el clima</h3>
-        <p>Obtenemos el tiempo actual en Bilbao usando una API meteorológica.</p>
-      </div>
-      <div class="step">
-        <h3>2. Buscamos eventos culturales</h3>
-        <p>Consultamos eventos en la agenda cultural del País Vasco.</p>
-      </div>
-      <div class="step">
-        <h3>3. Recomendamos planes</h3>
-        <p>Mostramos actividades que encajan con el clima del día.</p>
+  <section id="weather" class="weather-section">
+    <div class="weather-card">
+      <h2>Clima en Euskadi</h2>
+      <div id="weather-info" class="weather-content">
+        <p>Cargando clima...</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    <p>Planes Fav © 2026</p>
-  </footer>
+  <main id="view-container"> </main>
 
-  <script type="module" src="./src/js/index.js"></script>
+  <footer class="footer" id="footer"> </footer>
 
+  <script type="module" src="src/js/index.js"></script>
+  <script type="module" src="src/js/definir-card.js"></script>
+  <script type="module" src="src/components/footer.js"></script>
   <script type="module" src="./src/js/eventSearcher.js"></script>
+
 
 </body>
 

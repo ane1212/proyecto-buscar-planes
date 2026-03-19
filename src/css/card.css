@@ -1,9 +1,4 @@
-:root {
-    --primary: #6366f1;
-    --bg-card: #ffffff;
-    --text-main: #1f2937;
-    --text-light: #6b7280;
-}
+@import url('styles.css');
 
 .card {
     background: var(--bg-card);
@@ -14,7 +9,6 @@
     font-family: sans-serif;
 }
 
-/* Contenedor de imagen */
 .card-header {
     position: relative;
     height: 200px;
@@ -39,44 +33,79 @@
     align-items: center;
 }
 
+.icon-fav svg {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    fill: none;
+    stroke: currentColor;
+}
+
+.icon-fav.active {
+    background: var(--icon-fav);
+    border-color: var(--icon-fav);
+}
+
+.icon-fav.active svg {
+    fill: var(--bg-card);
+    stroke: var(--bg-card);
+    transform: scale(1.2);
+}
+
 .type-badge {
     position: absolute;
     bottom: 15px;
     left: 15px;
     background: var(--primary);
-    color: white;
+    color: var(--bg-card);
     padding: 4px 12px;
     border-radius: 10px;
     font-size: 0.8rem;
     font-weight: bold;
 }
 
-/* Contenido */
 .card-content {
     padding: 20px;
 }
 
-.card-title {
+.card-title-details {
     margin: 0;
     font-size: 1.4rem;
     color: var(--text-main);
 }
 
+.card-title {
+    font-size: 1.4rem;
+    color: var(--text-main);
+    margin: 0;
+    line-height: 1.2;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card-location {
-    color: var(--text-light);
+    color: var(--text-main);
     font-size: 0.9rem;
     margin: 5px 0 15px 0;
 }
 
-/* Fechas estilo "grid" */
 .card-dates {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f3f4f6;
+    background: var(--text-light);
     padding: 10px;
     border-radius: 12px;
     margin-bottom: 15px;
+}
+
+.card-date {
+    order: 3;
+    margin-top: 15px;
+    font-size: 0.85rem;
 }
 
 .date-item {
@@ -111,12 +140,11 @@
     margin-bottom: 20px;
 }
 
-/* Footer con precio y botón */
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #f3f4f6;
+    border-top: 1px solid var(--text-light);
     padding-top: 15px;
 }
 
@@ -128,9 +156,19 @@
 
 .btn-buy {
     background: var(--primary);
-    color: white;
+    color: var(--bg-card);
+    ;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 10px;
     font-weight: bold;
+}
+
+#view-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
