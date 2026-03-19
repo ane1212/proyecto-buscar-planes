@@ -4,33 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planes Fav</title>
+  <title>Home</title>
 
   <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="stylesheet" href="src/css/nav.css">
   <link rel="stylesheet" href="src/css/index.css">
   <link rel="stylesheet" href="src/css/card.css">
-
 </head>
 
 <body>
 
-  <nav class="navbar">
+  <nav class="navbar" id="navbar"></nav>
 
-    <div class="nav-left">
-      <a href="index.html">
-        <img src="assets/img/planes.png" alt="Planes Fav logo" class="logo">
-      </a>
-    </div>
-    <section id="filter">
+  <section id="filter" class="filter-bar">
+    <label class="filter-label">
+      <span>Tipo de evento</span>
       <select id="type"></select>
+    </label>
+    <label class="filter-label">
+      <span>Municipio</span>
       <select id="municipalities"></select>
+    </label>
+    <label class="filter-label">
+      <span>Fecha</span>
       <div id="date-filter"></div>
-    </section>
-    <div class="nav-right">
-      <button onclick="location.href='login.html'">Inicia sesión</button>
-    </div>
-
-  </nav>
+    </label>
+  </section>
 
   <section id="weather" class="weather-section">
     <div class="weather-card">
@@ -41,15 +41,15 @@
     </div>
   </section>
 
-  <main id="view-container"> </main>
+  <main id="view-container"></main>
 
-  <footer class="footer" id="footer"> </footer>
+  <footer class="footer" id="footer"></footer>
 
+  <script src="src/components/nav.js"></script>
   <script type="module" src="src/js/index.js"></script>
   <script type="module" src="src/js/definir-card.js"></script>
   <script type="module" src="src/components/footer.js"></script>
   <script type="module" src="./src/js/eventSearcher.js"></script>
-
 
 </body>
 

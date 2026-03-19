@@ -157,7 +157,6 @@
 .btn-buy {
     background: var(--primary);
     color: var(--bg-card);
-    ;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 10px;
@@ -171,4 +170,20 @@
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+@media (max-width: 540px) {
+  #view-container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+ 
+  .card {
+    margin: 0;
+    width: 100%;
+  }
+ 
+  .card-header {
+    height: 180px;
+  }
 }

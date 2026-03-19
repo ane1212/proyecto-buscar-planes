@@ -1,0 +1,17 @@
+@import url('styles.css');
+
+.favorites-header {
+    text-align: center;
+    padding: 2rem 0 0;
+    color: var(--primary);
+    font-size: 2rem;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}

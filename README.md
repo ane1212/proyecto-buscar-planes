@@ -8,7 +8,8 @@
 
 ## Caraterísticas Pirncipales 
 
-- **Filtro de eventos:** Algoritmo que clasifica eventos según las APIs de Kulturklik y Open-Meteo.
+- **Filtro de eventos:** Algoritmo que clasifica eventos según las APIs de Agenda Cultural de Euskadi y del tiempo Open-Meteo.
+Open-Meteo
 - **Geolocalizaión automática:** Detección de la ubicación del usuario para mostrar planes cercanos con el pronóstico local.
 - **Gestión de favoritos:** Sistema de persistencia para guardar planes ideales.
 - **Diseño Responsive:** Experiencia fluida tanto en dispositivos móviles como en escritorio.
@@ -20,7 +21,7 @@
 ## Stack Tecnológico
 
 - **Cliente:** HTML, CSS y JS Vanilla.
-- **APIs externas:** Kulturklik y Open-Meteo.
+- **APIs externas:** API Agenda Cultural de Euskadi y API del tiempo Open-Meteo.
 - **Gestor de tareas:** Jira.
 - **Control de versiones:** GIT y Github.
 

@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del evento</title>
+    <title>Favoritos</title>
+
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="stylesheet" href="src/css/nav.css">
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="stylesheet" href="src/css/card.css">
+    <link rel="stylesheet" href="src/css/favorites.css">
 </head>
 
 <body>
 
     <nav class="navbar" id="navbar"></nav>
 
-    <section id="weather" class="weather-section">
-        <div class="weather-card">
-            <h2>Clima en el lugar del evento</h2>
-            <div id="weather-info" class="weather-content">
-                <p>Cargando clima...</p>
-            </div>
-        </div>
-    </section>
-
-    <main id="view-container-details"></main>
+    <main>
+        <h1 class="favorites-header">Mis Favoritos</h1>
+        <section id="favorites-container" class="cards-container">
+            <p>Cargando favoritos...</p>
+        </section>
+    </main>
 
     <footer class="footer" id="footer"></footer>
 
     <script src="src/components/nav.js"></script>
-    <script type="module" src="src/js/details-card.js"></script>
+    <script type="module" src="src/js/favorites.js"></script>
     <script type="module" src="src/components/footer.js"></script>
 
 </body>
-
 </html>

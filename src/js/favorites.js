@@ -1,4 +1,4 @@
-import { getFavorites } from './storage.js';
+import { getFavorites, toggleFavorite } from './storage.js';
 import { createCard } from './definir-card.js';
 
 const container = document.getElementById('favorites-container');
@@ -16,6 +16,7 @@ if (!currentUser) {
         container.innerHTML = '<p>No tienes favoritos guardados aún.</p>';
     } else {
         container.innerHTML = favorites.map(e => createCard(e)).join('');
+        container.querySelectorAll('.icon-fav').forEach(btn => btn.classList.add('active'));
     }
 
     container.addEventListener('click', (e) => {
@@ -25,8 +26,13 @@ if (!currentUser) {
         if (favBtn) {
             e.stopPropagation();
             const cardEl = favBtn.closest('.card');
-            const eventData = JSON.parse(cardEl.dataset.event);
-            toggleFavorite(eventData);
+            const eventId = cardEl.id;
+            const allFavorites = getFavorites();
+            const eventData = allFavorites.find(f => String(f.id) === String(eventId));
+
+            if (eventData) {
+                toggleFavorite(eventData);
+            }
             cardEl.remove();
 
             if (container.querySelectorAll('.card').length === 0) {
