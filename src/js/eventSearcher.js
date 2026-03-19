@@ -1,6 +1,11 @@
 import { events, municipalities, eventTypes, } from '../api/apiPlanes.js';
-
 import { renderEvents } from './definir-card.js';
+import loadWeatherByCoordinates from '../api/apiTiempo.js';
+
+const DEFAULT_LAT = 43.2630;
+const DEFAULT_LON = -2.9350;
+
+const municipalityCoords = new Map();
 
 function filterType(type) {
     return `<option value="${type.id}">${type.name}</option>`;
@@ -13,8 +18,8 @@ async function listTypes() {
     section.innerHTML += allTypes.map(e => filterType(e)).join('');
 }
 
-export function filterMunicipalities(municipalities) {
-    return `<option value="${municipalities.id}">${municipalities.name}</option>`;
+function filterMunicipalities(municipality) {
+    return `<option value="${municipality.id}">${municipality.name}</option>`;
 }
 
 async function listMunicipalities() {
@@ -22,6 +27,13 @@ async function listMunicipalities() {
     const section = document.getElementById('municipalities');
     section.innerHTML = `<option value="todos">Todos</option>`;
     section.innerHTML += allTypes.map(e => filterMunicipalities(e)).join('');
+
+    allTypes.forEach(m => {
+        if(m.lat && m.lon) {
+            municipalityCoords.set(String(m.id), { lat: m.lat, lon: m.lon});
+        }
+        
+    });
 }
 
 function date() {
@@ -32,7 +44,7 @@ function date() {
 function listDate() {
     const section = document.getElementById('date-filter');
     if (section) {
-        section.innerHTML = date();
+        section.innerHTML = `<input type="date" id="filter-date">`;
     }
 }
 
@@ -61,6 +73,32 @@ async function applyFilters() {
     );
 
     renderEvents(results);
+
+    if (municipalityId && municipalityCoords.has(municipalityId)) {
+        const { lat, lon } = municipalityCoords.get(municipalityId);
+        updateWeatherTitle(municipality);
+        loadWeatherByCoordinates(lat, lon);
+
+    } else if (results.length > 0 && results[0].lat && results[0].lon) {
+        loadWeatherByCoordinates(results[0].lat, results[0].lon);
+        updateWeatherTitle(null);
+
+    } else {
+        loadWeatherByCoordinates(DEFAULT_LAT, DEFAULT_LON);
+        updateWeatherTitle(null);
+    }
+}
+
+function updateWeatherTitle(municipalityId) {
+    const title = document.querySelector('.weather-card h2');
+    if (!title) return;
+    if (municipalityId) {
+        const select = document.getElementById('municipalities');
+        const selectedText = select?.options[select.selectedIndex]?.text;
+        title.textContent = `Clima en ${selectedText || 'Euskadi'}`;
+    } else {
+        title.textContent = 'Clima en Euskadi';
+    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
