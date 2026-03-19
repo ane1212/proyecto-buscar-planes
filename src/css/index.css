@@ -1,7 +1,5 @@
 @import url('styles.css');
 
-
-/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -25,7 +23,28 @@
   align-items: center;
 }
 
-/* SECCIONES */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--text-light);
+}
+ 
+.filter-bar select,
+.filter-bar input[type="date"] {
+  flex: 1 1 140px;
+  min-width: 0;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
+  color: var(--text-main);
+}
+
 .weather-section {
   display: flex;
   justify-content: center;
@@ -40,6 +59,8 @@
   color: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.3);
   text-align: center;
+  width: 100%;
+  max-width: 600px;
 }
 
 .weather-card h2 {
@@ -73,7 +94,6 @@
   font-weight: 600;
 }
 
-/* FOOTER */
 .footer {
   display: flex;
   justify-content: center;
@@ -90,8 +110,7 @@
   margin: 0;
 }
 
-
-@media(max-width: 480px) {
+@media(max-width: 540px) {
   .navbar {
     flex-direction: column;
     gap: 0.5rem;
@@ -107,4 +126,24 @@
     width: 100%;
     text-align: center;
   }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+ 
+  .filter-bar select,
+  .filter-bar input[type="date"] {
+    width: 100%;
+    flex: unset;
+  }
+
+    .weather-card {
+    padding: 16px 20px;
+  }
+ 
+  .weather-content {
+    gap: 16px;
+  }
+ 
 }
