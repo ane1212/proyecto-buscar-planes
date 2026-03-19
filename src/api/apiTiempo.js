@@ -51,7 +51,7 @@ function getWeatherDescription(code) {
   }
 }
 
-export default async function loadWeatherByCoordinates(LAT,LON) {
+export default async function loadWeatherByCoordinates(LAT, LON) {
 
   console.log("Módulo de clima cargado");
 
@@ -59,9 +59,9 @@ export default async function loadWeatherByCoordinates(LAT,LON) {
 
   try {
     const response = await fetch(url);
-    if (!response.ok){
+    if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
-    } 
+    }
 
     const data = await response.json();
     const weather = data.current_weather;
@@ -69,11 +69,19 @@ export default async function loadWeatherByCoordinates(LAT,LON) {
     console.dir(data.current_weather);
 
     document.getElementById("weather-info").innerHTML = `
-    <p>Temperatura: ${weather.temperature} °C</p>
-    <p>Viento: ${weather.windspeed} m/s</p>
-    <p>Estado: ${description}</p>    
+        <div class="weather-item">
+            <span class="label">Temperatura</span>
+            <div class="value">${weather.temperature}°C</div>
+        </div>
+        <div class="weather-item">
+            <span class="label">Viento</span>
+            <div class="value">${weather.windspeed} m/s</div>
+        </div>
+        <div class="weather-item">
+            <span class="label">Estado</span>
+            <div class="value">${description}</div>
+        </div>
     `;
-
   } catch (error) {
     console.error("Error al obtener el clima:", error);
     document.getElementById("weather-info").innerHTML = "<p>Error al cargar el clima. Inténtalo de nuevo.</p>";

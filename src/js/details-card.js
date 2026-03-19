@@ -19,7 +19,7 @@ function createDetailsCard(event) {
 
         <div class="card-content">
             <div class="content-top">
-                <h2 class="card-title">${event.title}</h2>
+                <h2 class="card-title-details">${event.title}</h2>
                 <p class="card-location">${event.municipality} - ${event.province.name}</p>
             </div>
 
