@@ -4,7 +4,7 @@ import { toggleFavorite, isFavorite, getFavorites } from './storage.js';
 export function createCard(event) {
     const faved = isFavorite(event.id);
     return `
-      <article class="card" id="${event.id}">
+      <article class="card" id="${event.id}" data-event="${JSON.stringify(event).replace(/"/g, '&quot;')}">
         <div class="card-header">
             <img src="${event.images}" class="card-img" alt="${event.title}">
             
@@ -67,6 +67,9 @@ container.addEventListener('click', (e) => {
     if (favBtn) {
         e.stopPropagation();
 
+        const cardEl = favBtn.closest('.card');
+        if (!cardEl || !cardEl.dataset.event) return;
+
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!currentUser) {
             alert("Debes iniciar sesión para guardar favoritos");
@@ -74,7 +77,6 @@ container.addEventListener('click', (e) => {
             return;
         }
 
-        const cardEl = favBtn.closest('.card');
         const eventData = JSON.parse(cardEl.dataset.event);
         const result = toggleFavorite(eventData);
 
