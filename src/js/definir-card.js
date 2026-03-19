@@ -1,6 +1,8 @@
 import { events } from '../api/apiPlanes.js';
+import { toggleFavorite, isFavorite, getFavorites } from './storage.js';
 
 export function createCard(event) {
+    const faved = isFavorite(event.id);
     return `
       <article class="card" id="${event.id}">
         <div class="card-header">
@@ -36,28 +38,57 @@ export function renderEvents(data) {
     container.innerHTML = data.map(e => createCard(e)).join('');
 }
 
+function renderFavorites() {
+    const favContainer = document.getElementById('favorites-container');
+    if (!favContainer) return;
+    const favorites = getFavorites();
+    if (favorites.length === 0) {
+        favContainer.innerHTML = '<p id="no-favorites">No tienes favoritos</p>';
+        return;
+    }
+    favContainer.innerHTML = favorites.map(e => createCard(e)).join('');
+}
+
 async function loadPlanSection() {
     const data = await events(10, 1, null, null, null, null, null, 2026);
     renderEvents(data);
 }
 
-window.addEventListener('DOMContentLoaded', loadPlanSection);
+window.addEventListener('DOMContentLoaded', () => {
+    loadPlanSection();
+    renderFavorites();
+});
 
 const container = document.getElementById('view-container');
 container.addEventListener('click', (e) => {
     const favBtn = e.target.closest('.icon-fav');
     const card = e.target.closest('.card');
+
     if (favBtn) {
         e.stopPropagation();
-        favBtn.classList.toggle('active');
+
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            alert("Debes iniciar sesión para guardar favoritos");
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const cardEl = favBtn.closest('.card');
+        const eventData = JSON.parse(cardEl.dataset.event);
+        const result = toggleFavorite(eventData);
+
+        if (result.success) {
+            favBtn.classList.toggle('active', result.isFavorite);
+            renderFavorites();
+        }
+
         favBtn.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-            favBtn.style.transform = 'scale(1)';
-        }, 100);
+        setTimeout(() => { favBtn.style.transform = 'scale(1)'; }, 100);
         return;
     }
+
     if (card) {
-        const id = card.id;
-        window.location.href = `details-card.html?id=${id}`;
+        window.location.href = `details-card.html?id=${card.id}`;
     }
 });
