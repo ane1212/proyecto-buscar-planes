@@ -133,28 +133,67 @@ async function applyFilters() {
         const indoorResults = results.filter(e => isIndoor(e));
         if (indoorResults.length > 0) {
             filteredResults = indoorResults;
-            showWeatherBanner(true);
+            showWeatherBanner('bad');
         } else {
-            showWeatherBanner(false);
+            showWeatherBanner('bad-no-indoor');
         }
     } else {
-        showWeatherBanner(false);
+        showWeatherBanner('good');
     }
 
     renderEvents(filteredResults);
 }
 
-function showWeatherBanner(active) {
+function showWeatherBanner(state) {
     let banner = document.getElementById('weather-filter-banner');
     if (!banner) {
         banner = document.createElement('div');
         banner.id = 'weather-filter-banner';
-        banner.style.cssText = `text-align:center;padding:0.6rem 1rem;background:#e0e7ff;color:#3730a3;font-size:0.85rem;font-weight:500;`;
         const weatherSection = document.getElementById('weather');
         if (weatherSection) weatherSection.after(banner);
     }
-    banner.style.display = active ? 'block' : 'none';
-    if (active) banner.textContent = 'Mal tiempo detectado, mostrando solo eventos de interior';
+
+    const messages = {
+        'good': {
+            icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5540C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`,
+            text: 'Buen tiempo, te mostramos todos los planes disponibles',
+            bg: '#f5f3ff',
+            color: '#5540C9',
+            border: '#c4b5fd'
+        },
+        'bad': {
+            icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4b5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M11 13v8M8 16v4M14 16v4"/></svg>`,
+            text: 'Hoy llueve, te recomendamos solo planes de interior como teatro, cine o exposiciones',
+            bg: '#fff1f2',
+            color: '#ff4b5c',
+            border: '#fecdd3'
+        },
+        'bad-no-indoor': {
+            icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4b5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M11 13v8M8 16v4M14 16v4"/></svg>`,
+            text: 'Hoy llueve, no hemos encontrado planes de interior disponibles, mostrando todos',
+            bg: '#fff1f2',
+            color: '#ff4b5c',
+            border: '#fecdd3'
+        }
+    };
+
+    const { icon, text, bg, color, border } = messages[state];
+
+    banner.style.cssText = `
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0.85rem 1.5rem;
+        background: ${bg};
+        color: ${color};
+        border-top: 3px solid ${border};
+        border-bottom: 3px solid ${border};
+        font-size: 0.95rem;
+        font-weight: 600;
+    `;
+
+    banner.innerHTML = `${icon} <span>${text}</span>`;
 }
 
 function updateWeatherTitle(municipalityId) {
@@ -172,7 +211,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     await listMunicipalities();
     await listTypes();
     listDate();
-    
+
     document.getElementById('filter-date')?.addEventListener('change', applyFilters);
     applyFilters();
 });
