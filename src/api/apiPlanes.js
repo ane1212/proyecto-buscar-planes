@@ -1,4 +1,3 @@
-
 const URL_BASE = "https://api.euskadi.eus/culture/events"
 
 class APIEvent {
@@ -15,6 +14,8 @@ class APIEvent {
         this.purchaseUrl = event.purchaseUrlEs;
         this.hour = event.openingHoursEs;
         this.province = provinceMap.get(Number(event.provinceNoraCode)) || '';
+        this.lat = event.municipalityLatitude;
+        this.lon = event.municipalityLongitude;
     }
 }
 
@@ -31,6 +32,8 @@ class APIMunicipalities {
     constructor(municipality) {
         this.id = municipality?.municipalityId;
         this.name = municipality?.nameEs;
+        this.lat = municipality?.latitude;
+        this.lon = municipality?.longitude;
     }
 }
 

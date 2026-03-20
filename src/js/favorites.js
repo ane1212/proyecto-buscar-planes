@@ -1,4 +1,4 @@
-import { getFavorites, toggleFavorite } from './storage.js';
+import { getFavorites, toggleFavorites } from './storage.js';
 import { createCard } from './definir-card.js';
 
 const container = document.getElementById('favorites-container');
@@ -31,7 +31,7 @@ if (!currentUser) {
             const eventData = allFavorites.find(f => String(f.id) === String(eventId));
 
             if (eventData) {
-                toggleFavorite(eventData);
+                toggleFavorites(eventData);
             }
             cardEl.remove();
 

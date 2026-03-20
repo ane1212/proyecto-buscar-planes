@@ -1,4 +1,3 @@
-
 function createFooter() {
     return `
         <p>Planes Fav © 2026</p>

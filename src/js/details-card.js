@@ -1,5 +1,5 @@
 import { eventById } from '../api/apiPlanes.js';
-import { toggleFavorite, isFavorite } from './storage.js';
+import { toggleFavorites, isFavorite } from './storage.js';
 import loadWeatherByCoordinates from '../api/apiTiempo.js';
 
 const DEFAULT_LAT = 43.2630;
@@ -84,7 +84,7 @@ async function loadPlanSection() {
                         window.location.href = 'login.html';
                         return;
                     }
-                    const result = toggleFavorite(event);
+                    const result = toggleFavorites(event);
                     favBtn.classList.toggle('active', result.isFavorite);
                     favBtn.style.transform = 'scale(0.9)';
                     setTimeout(() => { favBtn.style.transform = 'scale(1)'; }, 100);
