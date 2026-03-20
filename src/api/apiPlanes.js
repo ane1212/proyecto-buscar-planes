@@ -1,21 +1,22 @@
 const URL_BASE = "https://api.euskadi.eus/culture/events"
 
 class APIEvent {
-    constructor(event, provinceMap, municipalitiesMap) {
+    constructor(event, provinceMap) {
         this.id = event.id;
-        this.title = event.nameEs;
-        this.description = event.descriptionEs;
-        this.startDate = new Date(event.startDate).toLocaleDateString();
-        this.endDate = new Date(event.endDate).toLocaleDateString();
-        this.municipality = event.municipalityEs;
-        this.images = event.images[0]?.imageUrl;
-        this.type = event.typeEs;
-        this.price = event.priceEs;
-        this.purchaseUrl = event.purchaseUrlEs;
-        this.hour = event.openingHoursEs;
+        this.title = event?.nameEs ?? '';
+        this.description = stripVideos(event?.descriptionEs ?? '');
+
+        this.startDate = new Date(event.startDate).toLocaleDateString() ?? '';
+        this.endDate = new Date(event.endDate).toLocaleDateString() ?? '';
+        this.municipality = event?.municipalityEs ?? '';
+        this.images = event?.images?.[0]?.imageUrl || './assets/img/no-photo.png';
+        this.type = event?.typeEs ?? '';
+        this.price = event?.priceEs ?? '';
+        this.purchaseUrl = event?.purchaseUrlEs ?? '';
+        this.hour = event?.openingHoursEs ?? '';
         this.province = provinceMap.get(Number(event.provinceNoraCode)) || '';
-        this.lat = event.municipalityLatitude;
-        this.lon = event.municipalityLongitude;
+        this.lat = event?.municipalityLatitude ?? null;
+        this.lon = event?.municipalityLongitude ?? null;
     }
 }
 
@@ -44,6 +45,11 @@ class APIType {
     }
 }
 
+function stripVideos(html = '') {
+    return html
+        .replace(/<iframe[\s\S]*?<\/iframe>/gi, '')
+        .replace(/<video[\s\S]*?<\/video>/gi, '');
+}
 
 async function events(elemets, page, day, month, municipalityId, provinceId, type, year) {
     try {
@@ -105,7 +111,7 @@ async function provinces() {
 
 async function municipalities() {
     try {
-        const res = await fetch(`${URL_BASE}/v1.0/municipalities`);
+        const res = await fetch(`${URL_BASE}/v1.0/municipalities?_elements=309&_page=1`);
         const data = await res.json();
 
         return data.items.map(item => new APIMunicipalities(item));

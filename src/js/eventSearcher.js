@@ -75,7 +75,7 @@ async function listTypes() {
     const container = document.getElementById('type-container');
     if (!container) return;
     const options = [{ value: 'todos', label: 'Todos' },
-        ...allTypes.map(t => ({ value: t.id, label: t.name }))];
+    ...allTypes.map(t => ({ value: t.id, label: t.name }))];
     container.appendChild(createCustomSelect('type', options));
     container.querySelector('.custom-select').addEventListener('change', applyFilters);
 }
@@ -84,8 +84,16 @@ async function listMunicipalities() {
     const allMunicipalities = await municipalities();
     const container = document.getElementById('municipalities-container');
     if (!container) return;
-    const options = [{ value: 'todos', label: 'Todos' },
-        ...allMunicipalities.map(m => ({ value: m.id, label: m.name }))];
+    const bilbao = allMunicipalities.find(m => m.name?.toLowerCase() === 'bilbao');
+
+    const options = [
+        bilbao ? { value: bilbao.id, label: bilbao.name } : { value: 'todos', label: 'Todos' },
+        { value: 'todos', label: 'Todos' },
+        ...allMunicipalities
+            .filter(m => !bilbao || m.id !== bilbao.id)
+            .map(m => ({ value: m.id, label: m.name }))
+    ];
+
     container.appendChild(createCustomSelect('municipalities', options));
     container.querySelector('.custom-select').addEventListener('change', applyFilters);
 
@@ -96,8 +104,12 @@ async function listMunicipalities() {
 
 function listDate() {
     const section = document.getElementById('date-filter');
-    if (section) section.innerHTML = `<input type="date" id="filter-date">`;
+    if (!section) return;
+
+    const today = new Date().toISOString().split('T')[0];
+    section.innerHTML = `<input type="date" id="filter-date" value="${today}">`;
 }
+
 
 async function applyFilters() {
     const type = getCustomSelectValue('type');
@@ -113,19 +125,19 @@ async function applyFilters() {
     const municipalityId = municipality !== 'todos' ? municipality : null;
     const selectedType = type !== 'todos' ? type : null;
 
-    const results = await events(10, 1, day, month, municipalityId, null, selectedType, year);
+    const results = await events(30, 1, day, month, municipalityId, null, selectedType, year);
+
+    const municipalityName = municipalityId ? results[0]?.municipality || null : null;
+    updateWeatherTitle(municipalityId, municipalityName);
 
     let weatherCode = null;
     if (municipalityId && municipalityCoords.has(municipalityId)) {
         const { lat, lon } = municipalityCoords.get(municipalityId);
-        updateWeatherTitle(municipalityId);
         weatherCode = await loadWeatherByCoordinates(lat, lon);
     } else if (results.length > 0 && results[0].lat && results[0].lon) {
         weatherCode = await loadWeatherByCoordinates(results[0].lat, results[0].lon);
-        updateWeatherTitle(null);
     } else {
         weatherCode = await loadWeatherByCoordinates(DEFAULT_LAT, DEFAULT_LON);
-        updateWeatherTitle(null);
     }
 
     let filteredResults = results;
@@ -143,6 +155,7 @@ async function applyFilters() {
 
     renderEvents(filteredResults);
 }
+
 
 function showWeatherBanner(state) {
     let banner = document.getElementById('weather-filter-banner');
@@ -196,9 +209,15 @@ function showWeatherBanner(state) {
     banner.innerHTML = `${icon} <span>${text}</span>`;
 }
 
-function updateWeatherTitle(municipalityId) {
+function updateWeatherTitle(municipalityId, municipalityName) {
     const title = document.querySelector('.weather-card h2');
     if (!title) return;
+
+    if (municipalityName) {
+        title.textContent = `Clima en ${municipalityName}`;
+        return;
+    }
+
     if (municipalityId) {
         const el = document.querySelector(`.custom-select[data-id="municipalities"] .custom-select__selected`);
         title.textContent = `Clima en ${el?.childNodes[0]?.nodeValue || 'Euskadi'}`;

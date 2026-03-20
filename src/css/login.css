@@ -45,6 +45,8 @@ p {
 
 #incorrect {
     display: none;
+    color: var(--icon-fav);
+    margin-bottom: 5px;
 }
 
 .hidden {
