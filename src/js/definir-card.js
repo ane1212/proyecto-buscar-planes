@@ -1,5 +1,5 @@
 import { events } from '../api/apiPlanes.js';
-import { toggleFavorite, isFavorite, getFavorites } from './storage.js';
+import { toggleFavorites, isFavorite, getFavorites } from './storage.js';
 
 export function createCard(event) {
     const faved = isFavorite(event.id);
@@ -80,7 +80,7 @@ if (container) {
 
             const cardEl = favBtn.closest('.card');
             const eventData = JSON.parse(cardEl.dataset.event);
-            const result = toggleFavorite(eventData);
+            const result = toggleFavorites(eventData);
 
             if (result.success) {
                 favBtn.classList.toggle('active', result.isFavorite);

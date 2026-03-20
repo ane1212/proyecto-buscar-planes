@@ -1,5 +1,4 @@
-import { registerUser, loginUser} from "./storage.js";
-
+import { registerUser, loginUser } from "./storage.js";
 
 const loginForm=document.getElementById('login-form');
 const registerForm=document.getElementById('register-form');
@@ -17,7 +16,6 @@ showLogin.addEventListener('click', (event) => {
     registerForm.classList.add('hidden');
     loginForm.classList.remove('hidden');
 });
-
 
 let passwordInputs= document.querySelectorAll(".password");
 let incorrect= document.querySelector("#incorrect");

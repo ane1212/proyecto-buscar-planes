@@ -28,7 +28,7 @@ export function getFavorites() {
     return data ? JSON.parse(data) : [];
 }
 
-export function toggleFavorite(event) {
+export function toggleFavorites(event) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return { success: false, message: "Debes iniciar sesión" };
     const key = `favorites_${currentUser.email}`;
