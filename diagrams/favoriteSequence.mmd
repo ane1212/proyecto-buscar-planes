@@ -1,0 +1,35 @@
+sequenceDiagram
+    actor Usuario
+    participant I as index.html
+    participant DOM as DOM / JS
+    participant LS as localStorage
+    participant F as favorites.html
+
+    rect rgb(240, 240, 255)
+        Note over Usuario,DOM: A — Carga de la página de planes
+        Usuario->>I: Abre index.html
+        I->>LS: getItem("favoritos")
+        LS-->>I: Array de IDs guardados (o vacío)
+        I->>DOM: Marca ♥ ya guardados
+    end
+
+    rect rgb(255, 245, 230)
+        Note over Usuario,LS: B — El usuario guarda un plan como favorito
+        Usuario->>DOM: Click en ♥ (evento onclick)
+        DOM->>LS: getItem("favoritos")
+        LS-->>DOM: Array actual
+        Note over DOM: ¿Ya es favorito?<br/>push(id) o splice(id)
+        DOM->>LS: setItem("favoritos", JSON)
+        LS-->>DOM: Guardado ✓
+        DOM-->>I: ♥ cambia color (activo/inactivo)
+    end
+
+    rect rgb(255, 240, 240)
+        Note over Usuario,F: C — El usuario visita favorites.html
+        Usuario->>F: Navega a favorites.html
+        F->>LS: getItem("favoritos")
+        LS-->>F: Array de IDs guardados
+        F->>DOM: Genera tarjetas con los planes guardados
+        DOM-->>I: Renderiza lista de favoritos
+        I-->>Usuario: Ve sus planes favoritos
+    end
