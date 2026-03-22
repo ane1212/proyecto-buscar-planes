@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/nav.css">
+    <link rel="stylesheet" href="src/css/index.css">
+    <link rel="stylesheet" href="src/css/about.css">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="page-main">
+
+        <section class="about-hero">
+            <h1>¿Qué es Planes Fav?</h1>
+            <p>Tu guía de eventos culturales en Euskadi. Descubre conciertos, exposiciones, ferias, cine y mucho más.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>¿Cómo funciona?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon"></div>
+                    <h3>1. Consultamos el clima</h3>
+                    <p>Al entrar en la app, obtenemos el tiempo actual en Euskadi en tiempo real.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"></div>
+                    <h3>2. Buscamos eventos</h3>
+                    <p>Conectamos con la agenda cultural oficial del País Vasco y traemos los eventos más recientes.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"></div>
+                    <h3>3. Filtra a tu gusto</h3>
+                    <p>Usa los filtros de tipo de evento, municipio y fecha para encontrar exactamente lo que buscas sin tener que buscar en mil sitios.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"></div>
+                    <h3>4. Guarda tus favoritos</h3>
+                    <p>Crea una cuenta, inicia sesión y guarda los planes que más te interesen. Tus favoritos se guardan por usuario, así cada uno tiene los suyos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section about-tech">
+            <h2>¿Con qué está hecho?</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <span class="tech-badge">API</span>
+                    <p>Agenda Cultural de Euskadi <br><small>euskadi.eus - eventos</small></p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">API</span>
+                    <p>Open-Meteo <br><small>Clima en tiempo real por coordenadas</small></p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">JS</span>
+                    <p>Vanilla JavaScript <br><small>Sin frameworks, todo nativo</small></p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge"></span>
+                    <p>LocalStorage <br><small>Usuarios y favoritos guardados en el navegador</small></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+
+    <script src="src/components/nav.js"></script>
+    <script type="module" src="src/components/footer.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+@import url('styles.css');
+
+.card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
+    font-family: sans-serif;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.13);
+}
+
+.card-header {
+    position: relative;
+    height: 280px;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.icon-fav {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.icon-fav svg {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    fill: none;
+    stroke: currentColor;
+    width: 18px;
+    height: 18px;
+}
+
+.icon-fav.active {
+    background: var(--icon-fav);
+    border-color: var(--icon-fav);
+}
+
+.icon-fav.active svg {
+    fill: var(--bg-card);
+    stroke: var(--bg-card);
+    transform: scale(1.2);
+}
+
+.type-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: var(--primary);
+    color: var(--bg-card);
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-title-details {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--text-main);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    color: var(--text-main);
+    margin: 0 0 4px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-location {
+    color: var(--text-main);
+    font-size: 0.85rem;
+    margin: 4px 0 12px;
+    opacity: 0.8;
+}
+
+.card-dates {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--text-light);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.card-date {
+    order: 3;
+    margin-top: 15px;
+    font-size: 0.85rem;
+}
+
+.date-item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+}
+
+.date-item small {
+    font-size: 0.6rem;
+    color: #9ca3af;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.date-item span {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--text-main);
+}
+
+.date-sep {
+    width: 1px;
+    height: 20px;
+    background: #d1d5db;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--text-light);
+    padding-top: 15px;
+    position: relative;
+}
+
+.price-tag {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.btn-buy {
+    background: var(--primary);
+    color: var(--bg-card);
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    display: inline-block;
+}
+
+.btn-buy:hover {
+    background: var(--bg-btn-hover);
+    color: var(--bg-card);
+}
+
+#view-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+
+    #view-container,
+    .cards-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+
+    .card-header {
+        height: 200px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-header {
+        height: 320px;
+    }
+}

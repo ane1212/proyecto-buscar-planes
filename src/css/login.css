@@ -1,0 +1,54 @@
+@import url('styles.css');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--secondary);
+}
+
+.container {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.form-box {
+    display: block;
+}
+
+#incorrect {
+    display: none;
+    color: var(--icon-fav);
+    margin-bottom: 5px;
+}
+
+.hidden {
+    display: none;
+}

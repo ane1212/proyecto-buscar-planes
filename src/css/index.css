@@ -1,0 +1,237 @@
+@import url('styles.css');
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.nav-left .logo {
+    width: 135px;
+    height: auto;
+    object-fit: contain;
+}
+
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    align-items: flex-end;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--text-light);
+}
+
+.filter-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1 1 160px;
+    min-width: 0;
+    max-width: 280px;
+}
+
+.filter-label span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-label select,
+.filter-label input[type="date"],
+.filter-label #date-filter input {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: white;
+    color: var(--text-main);
+}
+
+.weather-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.weather-card {
+    background: var(--primary);
+    border-radius: 24px;
+    padding: 20px 40px;
+    color: var(--bg-card);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.weather-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.weather-content {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+
+.weather-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.weather-item .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.weather-item .value {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.weather-state {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.weather-state svg {
+    flex-shrink: 0;
+    stroke: var(--bg-card);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #222;
+    color: #fff;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.footer p { margin: 0; }
+
+#view-container { flex: 1; }
+
+@media (max-width: 600px) {
+    .filter-bar {
+        flex-direction: column;
+        padding: 0.75rem 1rem;
+        gap: 0.75rem;
+    }
+
+    .filter-label {
+        flex: unset;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .weather-card {
+        padding: 16px 20px;
+    }
+
+    .weather-content {
+        gap: 16px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px;
+        font-size: 0.85rem;
+    }
+}
+
+.custom-select {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.custom-select__selected {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: white;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.custom-select.open .custom-select__selected {
+    border-color: var(--primary);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.custom-select__arrow {
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+    color: var(--text-main);
+    flex-shrink: 0;
+}
+
+.custom-select.open .custom-select__arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select__list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid var(--primary);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    list-style: none;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 200;
+    box-shadow: 0 8px 20px rgba(85, 64, 201, 0.12);
+}
+
+.custom-select.open .custom-select__list {
+    display: block;
+}
+
+.custom-select__option {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.custom-select__option:hover {
+    background: #f3f0ff;
+    color: var(--primary);
+}
+
+.custom-select__option.active {
+    background: #ede9fe;
+    color: var(--primary);
+    font-weight: 600;
+}
